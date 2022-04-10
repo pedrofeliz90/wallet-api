@@ -17,9 +17,9 @@ class TransactionRepository
     public function addTransactionCredit($transaction)
     {
         try{
-            $query = 'INSERT INTO transactions_credit (id_user, type, value) VALUES (?, ?, ?)';
+            $query = 'INSERT INTO transactions_credit (id_user, type, value, id_caixa) VALUES (?, ?, ?, ?)';
             $stmt = $this->db->get()->prepare($query);
-            $stmt->execute([$transaction->id_user, $transaction->type, $transaction->value]);
+            $stmt->execute([$transaction->id_user, $transaction->type, $transaction->value, $transaction->id_caixa]);
             return true;
         } catch (PDOException $e){
             throw new Error('Erro ao adicionar transação de crédito no DB ' . $e->getMessage());
@@ -29,9 +29,9 @@ class TransactionRepository
     public function addTransactionDebit($transaction)
     {
         try{
-            $query = 'INSERT INTO transactions_debit (id_user, type, value) VALUES (?, ?, ?)';
+            $query = 'INSERT INTO transactions_debit (id_user, type, value, id_caixa) VALUES (?, ?, ?, ?)';
             $stmt = $this->db->get()->prepare($query);
-            $stmt->execute([$transaction->id_user, $transaction->type, $transaction->value]);
+            $stmt->execute([$transaction->id_user, $transaction->type, $transaction->value, $transaction->id_caixa]);
             return true;
         } catch (PDOException $e){
             throw new Error('Erro ao adicionar transação de débito no DB ' . $e->getMessage());

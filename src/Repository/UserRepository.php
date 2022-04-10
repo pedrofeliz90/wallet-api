@@ -25,6 +25,7 @@ class UserRepository
         }
     }
 
+
     public function editUserById($id, $data)
     {
         try{
