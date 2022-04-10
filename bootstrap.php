@@ -4,6 +4,7 @@ use Brunosribeiro\WalletApi\Controllers\BalanceController;
 use Brunosribeiro\WalletApi\Controllers\ExtractController;
 use Brunosribeiro\WalletApi\Controllers\TransactionController;
 use Brunosribeiro\WalletApi\Controllers\UserController;
+use Brunosribeiro\WalletApi\Controllers\CaixaController;
 use Brunosribeiro\WalletApi\Router;
 use Brunosribeiro\WalletApi\Infra\DBConnection;
 use Brunosribeiro\WalletApi\Infra\iniciaDB;
@@ -38,6 +39,25 @@ $router->get('/', function () {
 $router->get('/users', function () {
     $userController = new UserController();
     $result = $userController->getAllUsers();
+    return $result;
+});
+
+$router->get('/caixas', function () {
+    $caixaController = new CaixaController();
+    $result = $caixaController->MostrarCaixas();
+    return $result;
+});
+
+$router->get('/abrircaixa', function () {
+    $caixaController = new CaixaController();
+    $result = $caixaController->abrircaixa();
+    return $result;
+});
+
+$router->post('/fecharcaixa', function () {
+    $params = $_POST;
+    $caixaController = new CaixaController();
+    $result = $caixaController->fecharcaixa($params);
     return $result;
 });
 
