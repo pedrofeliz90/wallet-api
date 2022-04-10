@@ -1,5 +1,5 @@
 # Wallet-api 
-API de carteira online em PHP, que registra usuários, transações, e faz consulta de saldo, e extrato por período.
+API de ring game poker em PHP, que registra usuários, transações, e faz consulta de saldo, e extrato por período, movimento de caixa.
 
 ## Tecnologias/Ferramentas
 - PHP 7.4
@@ -11,6 +11,11 @@ API de carteira online em PHP, que registra usuários, transações, e faz consu
 -------------------------------------------------------------------------------------------------------
 
 ## Rotas
+### CAIXA
+- Buscar todos os caixas: GET [/caixas](http://localhost:9000/caixas)
+- Abrir Caixa: GET [/abrircaixa](http://localhost:9000/abrircaixa)
+- Fechar Caixa: POST [/fecharcaixa](http://localhost:9000/fecharcaixa) - body: {fechamento: '5000', rake: '800', crupie: '140'
+
 ### USER
 - Buscar todos os usuários: GET [/users](http://localhost:9000/users)
 - Buscar usuário por ID: GET [/user/ID](http://localhost:9000/user/1)
@@ -29,7 +34,7 @@ API de carteira online em PHP, que registra usuários, transações, e faz consu
 
 ### EXTRATO
 - Consultar extrato últimos dias: GET [/extractlastdays/?id=&days=](http://localhost:9000/extractlastdays/?id=3&days=30)
-- Consultar extrato por período: GET [/extractperperiod/?id=&initialDate=&finalDate=](http://localhost:9000/extractperperiod/?id=3&initialDate=01/10/2021&finalDate=30/01/2022)
+- Consultar extrato por período: GET [/extractperperiod/?id=&initialDate=&finalDate=](http://localhost:9000/extractperperiod/?id=3&initialDate=01/10/2021&finalDate=30/01/2023)
  -------------------------------------------------------------------------------------------------------
 
 ## Configurando Ambiente 
@@ -41,7 +46,7 @@ Requisitos
 -------------------------------------------------------------------------------------------------------
 
 ### Execute no terminal 
-1.  ```git clone https://github.com/brunosribeiroo/wallet-api.git```
+1.  ```git clone https://github.com/pedrofeliz90/wallet-api.git```
 2.  ```cd wallet-api```
 3.  ```composer install```
 4.  ```docker-compose up --build```
