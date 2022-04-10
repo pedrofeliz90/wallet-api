@@ -5,6 +5,7 @@ namespace Brunosribeiro\WalletApi\Controllers;
 use Brunosribeiro\WalletApi\Infra\DBConnection;
 use Brunosribeiro\WalletApi\Models\Transaction;
 use Brunosribeiro\WalletApi\Services\TransactionServices;
+use Brunosribeiro\WalletApi\Repository\CaixaRepository;
 use Error;
 use Exception;
 
@@ -28,6 +29,9 @@ class TransactionController
             $transaction = new Transaction();
             $transaction->setType('entrada');
             $transaction->setIdUser($params['id_user']);
+                $caixaRepo = new CaixaRepository($this->db);
+                $caixa = $caixaRepo->getCaixaId();
+            $transaction->setIdCaixa($caixa);            
             $transaction->setValue($params['value']);
             $transactionServices->addTransactionCredit($transaction);
             return json_encode(['success' => 'Transação registrada com sucesso!']);
@@ -45,6 +49,9 @@ class TransactionController
             $transaction = new Transaction();
             $transaction->setType('saida');
             $transaction->setIdUser($params['id_user']);
+                $caixaRepo = new CaixaRepository($this->db);
+                $caixa = $caixaRepo->getCaixaId();
+            $transaction->setIdCaixa($caixa);            
             $transaction->setValue($params['value']);
             $transactionServices->addTransactionDebit($transaction);
             return json_encode(['success' => 'Transação registrada com sucesso!']);

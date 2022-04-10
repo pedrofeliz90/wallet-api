@@ -5,6 +5,7 @@ namespace Brunosribeiro\WalletApi\Controllers;
 use Brunosribeiro\WalletApi\Infra\DBConnection;
 use Brunosribeiro\WalletApi\Models\User;
 use Brunosribeiro\WalletApi\Services\UserServices;
+use Brunosribeiro\WalletApi\Services\CaixaServices;
 use Error;
 use Exception;
 
