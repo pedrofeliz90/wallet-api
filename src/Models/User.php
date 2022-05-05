@@ -10,7 +10,8 @@ class User {
     public function __construct()
     {
         $this->name = '';
-        $this->nickName = '';
+        $this->piX = '';
+        $this->tipo = '';
         $this->deleted = 0;
     }
 
@@ -21,10 +22,10 @@ class User {
         return true;
     }
 
-    public function setNickName($nick)
+    public function setPiX($pi)
     {
-        if(strlen($nick) < 3) throw new Exception('Nickname inválido, é necessário no mínimo 3 caracteres');
-        $this->nickname = $nick;
+        if(strlen($pi) < 3) throw new Exception('Pix inválido, é necessário no mínimo 3 caracteres');
+        $this->pix = $pi;
         return true;
     }
 
@@ -35,6 +36,16 @@ class User {
             return true;
         } else {
             throw new Exception('Parâmetro inválido ao deletar, informe true ou false');
+        }
+    }
+
+    public function setTipo($tipo)
+    {
+        if ($tipo == 0 || $tipo == 1) {
+            $this->tipo = $tipo;
+            return true;
+        } else {
+            throw new Exception('Parâmetro inválido');
         }
     }
 

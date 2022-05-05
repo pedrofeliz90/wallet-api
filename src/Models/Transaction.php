@@ -13,6 +13,7 @@ class Transaction
         $this->id_user = null;
         $this->type = null;
         $this->value = null;
+        $this->id_caixa = null;
     }
 
     private function getTypes()
@@ -43,6 +44,14 @@ class Transaction
         if($value <= 0) throw new Exception('Valor inválido, insira um valor maior que 0');
         $formattedValue = number_format($value, '2', '.', '');
         $this->value = $formattedValue;
+        return true;
+    }
+
+    public function setIdCaixa($caixa)
+    {
+        if($caixa == 'Nao ha caixa aberto.') throw new Exception('Nao ha caixa aberto');
+        elseif(!is_numeric($caixa)) throw new Exception('ID do caixa invalido');
+        $this->id_caixa = $caixa;
         return true;
     }
 }
