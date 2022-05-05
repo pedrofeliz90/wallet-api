@@ -44,6 +44,41 @@ class TransactionServices
         }
     }
 
+    public function addTransactionCrupie($transaction)
+    {
+        try{
+            $userRepo = new UserRepository($this->db);
+            $user = $userRepo->getUserById($transaction->id_user);
+            if($user == null) throw new Exception('Usuário não encontrado');
+            $transactionRepo = new TransactionRepository($this->db);
+            $result = $transactionRepo->addTransactionCrupie($transaction);
+            return $result;
+        } catch (Error $error){
+            throw new Error($error);
+        }
+    }
+
+        public function getTransactionDebit()
+    {
+        try{
+            $transactionRepo = new TransactionRepository($this->db);
+            $result = $transactionRepo->getTransactionDebit();
+            return $result;
+        } catch (Error $e) {
+            throw new Error($e);
+        }
+    }
+
+        public function getTransactionCredit()
+    {
+        try{
+            $transactionRepo = new TransactionRepository($this->db);
+            $result = $transactionRepo->getTransactionCredit();
+            return $result;
+        } catch (Error $e) {
+            throw new Error($e);
+        }
+    }
     /*public function addTransactionDebit($transaction)
     {
         try{

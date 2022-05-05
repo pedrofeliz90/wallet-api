@@ -36,6 +36,18 @@ class UserServices
         }
     }
 
+     public function getUserByTipo($tipo)
+    {
+        try{
+            $userRepo = new UserRepository($this->db);
+            $result = $userRepo->getUserByTipo($tipo);
+            if($result == null) throw new Exception('Usuário não encontrado');
+            return $result;
+        } catch (Error $error) {
+            throw new Error($error);
+        }
+    }
+
     public function addUser($user)
     {
         try{
@@ -47,11 +59,11 @@ class UserServices
         }
     }
 
-    public function getUserByNickname($nick)
+    public function getUserBypix($pi)
     {
         try{
             $userRepo = new UserRepository($this->db);
-            $result = $userRepo->getUserByNickname($nick);
+            $result = $userRepo->getUserBypix($pi);
             if($result == null) throw new Exception('Usuário não encontrado');
             return $result;
         } catch (Error $error) {

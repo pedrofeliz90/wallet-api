@@ -25,4 +25,16 @@ class BalanceServices
             throw new Error($error);
         }
     }
+
+    public function getBalanceByIdAll()
+    {
+        try{
+            $balanceRepo = new BalanceRepository($this->db);
+            $result = $balanceRepo->getBalanceByIdAll();
+            if($result == null) throw new Exception('Sem Movimento');
+            return $result;
+        } catch (Error $error) {
+            throw new Error($error);
+        }
+    }
 }
