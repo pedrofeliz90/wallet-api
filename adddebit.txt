@@ -1,0 +1,5 @@
+<form action="/adddebit" method="post">
+ <p>Jogador: <input type="text" name="id_user" value="7"/></p>
+ <p>Valor: <input type="text" name="value" /></p>
+ <p><input type="submit" /></p>
+</form>

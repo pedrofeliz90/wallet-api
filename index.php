@@ -7,7 +7,7 @@ $environment = require './environment.php';
 $dotenv = Dotenv\Dotenv::createUnsafeImmutable(__DIR__, $environment);
 $dotenv->load();
 
-$iniciaDB = require './scr/Infra/DBInit.php';
+$iniciaDB = require './src/Infra/DBInit.php';
 
 $conn = new DBConnection(
     $_ENV['DB_HOST'],

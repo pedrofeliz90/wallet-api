@@ -1,0 +1,6 @@
+<form action="/fecharcaixa" method="post">
+ <p>Fechamento: <input type="text" name="fechamento"/></p>
+ <p>Rake: <input type="text" name="rake" /></p>
+ <p>Crupie: <input type="text" name="crupie" /></p>
+ <p><input type="submit" /></p>
+</form>

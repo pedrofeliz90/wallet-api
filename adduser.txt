@@ -1,0 +1,8 @@
+<form action="/user" method="post">
+ <p>Nome: <input type="text" name="name"/></p>
+ <p>Nickname: <input type="text" name="nickname" /></p>
+ <p><select name="tipo"></p>
+    <option value="0">Jogador</option>
+    <option value="1">Crupie</option>
+ <p><input type="submit" /></p>
+</form>
