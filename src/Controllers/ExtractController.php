@@ -44,4 +44,29 @@ class ExtractController
             return json_encode(['warning' => $exception->getMessage()]);
         }
     }
+
+    public function getPerCaixa($params)
+    {
+        try{
+            $extractServices = new ExtractServices($this->db);
+            $result = $extractServices->perCaixa($params['id'], $params['id_caixa']);
+            return json_encode($result);
+        } catch (Error $error) {
+            return json_encode('Erro ao consultar extrato.');
+        } catch (Exception $exception) {
+            return json_encode($exception->getMessage());
+        }
+    }
+
+            public function getAllTransaction()
+    {
+        try{
+            $extractServices = new ExtractServices($this->db);
+            $getExtract = $extractServices->getAllTransaction();
+            return json_encode(['success' => $getExtract]);
+        } catch (Error $error) {
+            echo $error;
+            return json_encode(['error' => 'Erro ao buscar todos os usuários.']);
+        }
+    }
 }

@@ -47,14 +47,27 @@ class UserController
         }
     }
 
-    public function getUserByNickname($nickname)
+    public function getUserByTipo($tipo)
+    {   
+        try{
+            $userServices = new UserServices($this->db);
+            $getUser = $userServices->getUserByTipo($tipo);
+            return json_encode(['success' => $getUser]);
+        } catch (Error $error) {
+            return json_encode(['error' => 'Erro ao buscar usuário por Tipo.']);
+        } catch (Exception $exception) {
+            return json_encode(['warning' => $exception->getMessage()]);
+        }
+    }
+
+    public function getUserBypix($pix)
     {
         try{
             $userServices = new UserServices($this->db);
-            $getUser = $userServices->getUserByNickname($nickname);
+            $getUser = $userServices->getUserBypix($pix);
             return json_encode(['success' => $getUser]);
         } catch (Error $error) {
-            return json_encode(['error' => 'Erro ao buscar usuário por nickname.']);
+            return json_encode(['error' => 'Erro ao buscar usuário por pix.']);
         } catch (Exception $exception) {
             return json_encode(['warning' => $exception->getMessage()]);
         }
@@ -79,12 +92,13 @@ class UserController
             $userServices = new UserServices($this->db);
             $user = new User();
             $user->setName($params['name']);
-            $user->setNickName($params['nickname']);
+            $user->setPix($params['pix']);
+            $user->setTipo($params['tipo']);
             $userServices->addUser($user);
             return json_encode(['success' => 'Usuário adicionado com sucesso']);
         } catch (Error $error) {
             if(strpos($error, 'Duplicate entry')) {
-                return json_encode(['warning' => 'Usuário já cadastrado, tente com outro nickname.']);
+                return json_encode(['warning' => 'Usuário já cadastrado, tente com outro pix.']);
             } else {
                 return json_encode(['error' => 'Erro ao cadastrar usuário']);
             }
@@ -99,12 +113,12 @@ class UserController
             $userServices = new UserServices($this->db);
             $user = new User();
             $user->setName($data['name']);
-            $user->setNickName($data['nickname']);
+            $user->setPix($data['pix']);
             $userServices->editUserById($id, $user);
             return json_encode(['success' => 'Usuário editado com sucesso']);
         } catch (Error $error) {
             if(strpos($error, 'Duplicate entry')) {
-                return json_encode(['warning' => 'Usuário já cadastrado, tente com outro nickname.']);
+                return json_encode(['warning' => 'Usuário já cadastrado, tente com outro pix.']);
             } else {
                 return json_encode(['error' => 'Erro ao editar usuário']);
             }

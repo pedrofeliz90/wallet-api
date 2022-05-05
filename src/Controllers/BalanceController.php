@@ -31,4 +31,17 @@ class BalanceController
             return json_encode(['warning' => $exception->getMessage()]);
         }
     }
+
+    public function getBalanceByIdAll()
+    {
+        try{
+            $balanceServices = new BalanceServices($this->db);
+            $result = $balanceServices->getBalanceByIdAll();
+            return json_encode($result);
+        } catch (Error $error){
+            return json_encode('Erro ao consultar saldo.');
+        } catch (Exception $exception) {
+            return json_encode($exception->getMessage());
+        }
+    }
 }
