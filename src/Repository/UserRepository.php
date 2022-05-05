@@ -16,9 +16,9 @@ class UserRepository
     public function addUser($user)
     {
         try{
-            $query = 'INSERT INTO users (name, nickname, deleted) VALUES (?,?,?)';
+            $query = 'INSERT INTO users (name, pix, deleted, tipo) VALUES (?,?,?,?)';
             $stmt = $this->db->get()->prepare($query);
-            $stmt->execute([$user->name, $user->nickname, $user->deleted]);
+            $stmt->execute([$user->name, $user->pix, $user->deleted, $user->tipo]);
             return true;
         } catch(PDOException $e){
             throw new Error('Erro ao adicionar usuário no DB ' . $e->getMessage());
@@ -51,7 +51,7 @@ class UserRepository
     public function getAllUsers()
     {
         try{
-            $query = 'SELECT id, name, nickname FROM users WHERE deleted = 0';
+            $query = 'SELECT id, name, pix, saldo, tipo FROM users WHERE deleted = 0';
             $stmt = $this->db->get()->prepare($query);
             $stmt->execute();
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -64,7 +64,7 @@ class UserRepository
     public function getUserById($id)
     {
         try{
-            $query = 'SELECT id, name, nickname FROM users WHERE id = ? AND deleted = 0';
+            $query = 'SELECT id, name, pix FROM users WHERE id = ? AND deleted = 0';
             $stmt = $this->db->get()->prepare($query);
             $stmt->execute([$id]);
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -75,24 +75,38 @@ class UserRepository
         }
     }
 
-    public function getUserByNickname($nick)
+    public function getUserByTipo($tipo)
     {
         try{
-            $query = 'SELECT id, name, nickname FROM users WHERE nickname = ? AND deleted = 0';
+            $query = 'SELECT id, name, pix FROM users WHERE tipo = ? AND deleted = 0';
             $stmt = $this->db->get()->prepare($query);
-            $stmt->execute([$nick]);
+            $stmt->execute([$tipo]);
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            if($result == null) return null;
+            return $result;
+        } catch(PDOException $e){
+            throw new Error('Erro ao buscar o usuário por Tipo no DB ' . $e->getMessage());
+        }
+    }
+
+    public function getUserBypix($pi)
+    {
+        try{
+            $query = 'SELECT id, name, pix FROM users WHERE pix = ? AND deleted = 0';
+            $stmt = $this->db->get()->prepare($query);
+            $stmt->execute([$pi]);
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
             if($result == null) return null;
             return $result;
         } catch (PDOException $e) {
-            throw new Error('Erro ao buscar o usuário por nickname no DB ' . $e->getMessage());
+            throw new Error('Erro ao buscar o usuário por pix no DB ' . $e->getMessage());
         }
     }
 
     public function getUserByName($name)
     {
         try{
-            $query = 'SELECT id, name, nickname FROM users WHERE name = ? AND deleted = 0';
+            $query = 'SELECT id, name, pix FROM users WHERE name = ? AND deleted = 0';
             $stmt = $this->db->get()->prepare($query);
             $stmt->execute([$name]);
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
